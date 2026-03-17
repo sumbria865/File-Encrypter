@@ -1,20 +1,21 @@
 pipeline {
-    agent any
-    stages {
-        stage('Clone') {
-            steps {
-                git branch: 'main', url: 'https://github.com/sumbria865/File-Encrypter.git'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh '''
-                echo "Building Java project from src folder..."
-                mkdir -p build
-                javac -d build "Password Protection/src"/*.java
-                echo "Build successful"
-                '''
-            }
-        }
+  agent { label 'agent' }
+
+  stages {
+    stage('Build') {
+      steps {
+        sh 'echo Running build on Jenkins Agent Node'
+      }
     }
+    stage('Test') {
+      steps {
+        sh 'echo Test stage running on agent'
+      }
+    }
+    stage('Deploy') {
+      steps {
+        sh 'echo Deploy stage running on agent'
+      }
+    }
+  }
 }
